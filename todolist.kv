@@ -1,0 +1,831 @@
+<MainMenuScreen@Screen>:
+    listBox:listBox
+    rename:rename
+    search_task:search_task
+    #nav_drawer:nav_drawer
+    all_tasks:all_tasks
+    important_tasks:important_tasks
+    create_list:create_list
+    completed_tasks:completed_tasks
+    list_name:list_name
+    sort:sort
+    all_lists:all_lists
+    #add_button:add_button
+    orientation: 'vertical'
+
+    # right lateral panel
+
+    BoxLayout:
+        BoxLayout:
+            size_hint: '0.05', '1.2'
+            pos_hint: {'y': 0.17}
+            orientation: 'vertical'
+
+            GridLayout:
+                cols: 1
+                rows: 12
+
+                BoxLayout:
+                    size_hint: 1, 0.5
+                MDIconButton:
+                    icon: 'home'
+                    line_color: 1,1,1,1
+                    id: all_tasks
+                    on_press: root.main_tasks()
+                BoxLayout:
+                    size_hint: 1, 0.08
+                MDIconButton:
+                    icon: 'star'
+                    line_color: 1,1,1,1
+                    id: important_tasks
+                    on_press: root.manager.current='important_tasks_screen'
+                BoxLayout:
+                    size_hint: 1, 0.08
+                MDIconButton:
+                    icon: 'pencil-plus'
+                    line_color: 1,1,1,1
+                    id: create_list
+                    on_press: root.manager.current = 'create_new_list_screen'
+                BoxLayout:
+                    size_hint: 1, 0.08
+                MDIconButton:
+                    icon: 'newspaper'
+                    line_color: 1,1,1,1
+                    id: all_lists
+                    on_press: root.manager.current = 'lists_of_lists_screen'
+                BoxLayout:
+                    size_hint: 1, 0.08
+                MDIconButton:
+                    icon: 'bank-check'
+                    line_color: 1,1,1,1
+                    id: completed_tasks
+                    on_press: root.manager.current="completed_screen"
+
+
+        # top panel
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            AnchorLayout:
+                anchor_y: 'top'
+                size_hint: 1, 0.05
+                GridLayout:
+                    size_hint: 1, 0.05
+                    cols: 4
+                    rows: 1
+                    Label:
+                        text: 'All'
+                        size_hint: 0.5, 0.05
+                        id: list_name
+                    MDTextField:
+                        id:search_task
+                        halign: 'center'
+                        valign: 'center'
+                        hint_text: 'Search'
+                        size_hint: 1, None
+                        line_color_normal: 0.15,0.15,0.15
+                        on_text: root.search()
+
+                    MDIconButton:
+                        id: rename
+                        icon: 'rename-box'
+                        on_press: root.manager.current='1'
+                        line_color: 1,1,1,1
+                    MDIconButton:
+                        icon: 'arrow-down'
+                        line_color: 1,1,1,1
+                        id: sort
+                        on_press: root.task_sort()
+
+            # Center
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: 0.1, 0.1
+                MDFloatingActionButton:
+                    icon: "plus"
+                    md_bg_color: 'black'
+                    on_press: root.goToAddingTaskScreen()
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: 1,1
+
+                BoxLayout:
+                    ScrollView:
+                        line_color_normal: 1,1,0,1
+                        id: listBox
+
+
+<ListitemWithCheckBox>:
+    RightCheckbox:
+        id: checkbox
+        on_active: root.active(*args)
+
+<ImportantTaskScreen@Screen>:
+    listBox:listBox
+    #rename:rename
+    search_task:search_task
+    #nav_drawer:nav_drawer
+    all_tasks:all_tasks
+    important_tasks:important_tasks
+    create_list:create_list
+    completed_tasks:completed_tasks
+    list_name:list_name
+    sort:sort
+    all_lists:all_lists
+    #add_button:add_button
+    orientation: 'vertical'
+
+    # right lateral panel
+
+    BoxLayout:
+        BoxLayout:
+            size_hint: '0.05', '1.2'
+            pos_hint: {'y': 0.17}
+            orientation: 'vertical'
+
+            GridLayout:
+                cols: 1
+                rows: 12
+
+                BoxLayout:
+                    size_hint: 1, 0.5
+                MDIconButton:
+                    icon: 'home'
+                    line_color: 1,1,1,1
+                    id: all_tasks
+                    on_press: root.main_tasks()
+                BoxLayout:
+                    size_hint: 1, 0.08
+                MDIconButton:
+                    icon: 'star'
+                    line_color: 1,1,1,1
+                    id: important_tasks
+                    on_press: root.manager.current='important_tasks_screen'
+                BoxLayout:
+                    size_hint: 1, 0.08
+                MDIconButton:
+                    icon: 'pencil-plus'
+                    line_color: 1,1,1,1
+                    id: create_list
+                    on_press: root.manager.current = 'create_new_list_screen'
+                BoxLayout:
+                    size_hint: 1, 0.08
+                MDIconButton:
+                    icon: 'newspaper'
+                    line_color: 1,1,1,1
+                    id: all_lists
+                    on_press: root.manager.current = 'lists_of_lists_screen'
+                BoxLayout:
+                    size_hint: 1, 0.08
+                MDIconButton:
+                    icon: 'bank-check'
+                    line_color: 1,1,1,1
+                    id: completed_tasks
+                    on_press: root.manager.current="completed_screen"
+
+
+        # top panel
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1, 1
+            AnchorLayout:
+                anchor_y: 'top'
+                size_hint: 1, 0.13
+                GridLayout:
+                    size_hint: 1, 0.05
+                    cols: 4
+                    rows: 1
+                    Label:
+                        text: 'Important'
+                        size_hint: 0.5, 0.05
+                        id: list_name
+                    MDTextField:
+                        id:search_task
+                        halign: 'center'
+                        valign: 'center'
+                        hint_text: 'Search'
+                        size_hint: 1, None
+                        line_color_normal: 0.15,0.15,0.15
+                        on_text: root.search()
+
+                    MDIconButton:
+                        icon: 'arrow-down'
+                        line_color: 1,1,1,1
+                        id: sort
+                        on_press: root.task_sort()
+
+            # Center
+
+#            BoxLayout:
+#                orientation: 'vertical'
+#                size_hint: 0.1, 0.1
+#                MDFloatingActionButton:
+#                    icon: "plus"
+#                    md_bg_color: 'black'
+#                    on_press: root.goToAddingTaskScreen()
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: 1,1
+
+                BoxLayout:
+                    ScrollView:
+                        line_color_normal: 1,1,0,1
+                        id: listBox
+
+
+<TwoListitemsWithCheckBox>:
+    RightCheckbox:
+        id: checkbox
+        on_active: root.active(*args)
+
+
+# Screen for another problem
+<ImportantOrCompletedTaskCheckScreen@Screen>:
+    name: 'goodbye_screen'
+    important:important
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 0.5, 0.25
+            GridLayout:
+                cols: 2
+                rows: 1
+                size_hint: 0.3, 0.25
+                pos_hint: {'x': 0.35}
+                MDSwitch:
+                    size_hint: 0.3, 0.3
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 1, 1
+                    line_color: 1, 1, 1, 1
+                    id:important
+                    on_active: root.press()
+
+                Label:
+                    text: 'Important'
+            BoxLayout:
+                size_hint: 0.3, 0.4
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'center'
+                GridLayout:
+                    cols: 1
+                    rows: 2
+                    MDRoundFlatButton:
+                        text: 'Continue'
+                        size_hint: 1, 0.5
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        line_color: 1, 1, 1, 1
+                        on_press: root.checking()
+                    MDRoundFlatButton:
+                        text: 'Back'
+                        size_hint: 1, 0.5
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        line_color: 1, 1, 1, 1
+                        on_press: root.manager.current = 'main_menu_screen'
+
+
+<AddingNewTaskScreen@Screen>:
+    taskToTxt:taskToTxt
+    check_the_terms_button:check_the_terms_button
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 0.5, 0.25
+            MDTextField:
+                id: taskToTxt
+                hint_text: 'Name of new task'
+                color: 'white'
+                halign: 'center'
+                valign: 'center'
+                size_hint: 1, None
+                multiline: False
+                on_text_validate: root.addTask()
+            GridLayout:
+                cols: 2
+                rows: 1
+                size_hint: 0.3, 0.25
+
+                MDCheckbox:
+                    id: check_the_terms_button
+                    text: 'Schedule deadlines'
+                    size_hint: 0.1, 0.25
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 1, 1
+                    line_color: 1, 1, 1, 1
+                    on_active: root.on_checkbox_active(*args)
+                Label:
+                    text: 'Schedule the deadlines'
+
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'center'
+                GridLayout:
+                    cols: 1
+                    rows: 2
+                    MDRoundFlatButton:
+                        text: 'Add task'
+                        id: addTaskButton
+                        on_press: root.addTask()
+                        size_hint: 1, 0.5
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        line_color: 1, 1, 1, 1
+                    MDRoundFlatButton:
+                        text: 'Back'
+                        on_press: root.manager.current = 'main_menu_screen'
+                        size_hint: 1, 0.5
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        line_color: 1, 1, 1, 1
+
+
+
+<CreateNewList@Screen>:
+    newList:newList
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 0.5, 0.25
+            MDTextField:
+                id: newList
+                hint_text: 'Name of new list'
+                color: 'white'
+                halign: 'center'
+                valign: 'center'
+                size_hint: 1, None
+                multiline: False
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'center'
+                GridLayout:
+                    cols: 1
+                    rows: 2
+                    MDRoundFlatButton:
+                        text: 'Create new list'
+                        on_press: root.createList()
+                        size_hint: 1, 0.5
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        line_color: 1, 1, 1, 1
+                    MDRoundFlatButton:
+                        text: 'Back'
+                        on_press: root.manager.current = 'main_menu_screen'
+                        size_hint: 1, 0.5
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        line_color: 1, 1, 1, 1
+
+
+<ListOfListsScreen@Screen>:
+    listBox:listBox
+    #rename:rename
+    #search_task:search_task
+
+    all_tasks:all_tasks
+    important_tasks:important_tasks
+    create_list:create_list
+    completed_tasks:completed_tasks
+    list_name:list_name
+    #sort:sort
+    all_lists:all_lists
+    #add_button:add_button
+    orientation: 'vertical'
+
+    # right lateral panel
+    BoxLayout:
+        BoxLayout:
+            size_hint: '0.05', '1.2'
+            pos_hint: {'y': 0.17}
+            orientation: 'vertical'
+
+            GridLayout:
+                cols: 1
+                rows: 12
+
+                BoxLayout:
+                    size_hint: 1, 0.6
+                MDIconButton:
+                    icon: 'home'
+                    line_color: 1,1,1,1
+                    id: all_tasks
+                    on_press: root.main_tasks()
+                BoxLayout:
+                    size_hint: 1, 0.08
+                MDIconButton:
+                    icon: 'star'
+                    line_color: 1,1,1,1
+                    id: important_tasks
+                    on_press: root.manager.current = 'important_tasks_screen'
+                BoxLayout:
+                    size_hint: 1, 0.08
+                MDIconButton:
+                    icon: 'pencil-plus'
+                    line_color: 1,1,1,1
+                    id: create_list
+                    on_press: root.manager.current = 'create_new_list_screen'
+                BoxLayout:
+                    size_hint: 1, 0.08
+                MDIconButton:
+                    icon: 'newspaper'
+                    line_color: 1,1,1,1
+                    id: all_lists
+                    on_press: root.manager.current = 'lists_of_lists_screen'
+                BoxLayout:
+                    size_hint: 1, 0.08
+                MDIconButton:
+                    icon: 'bank-check'
+                    line_color: 1,1,1,1
+                    id: completed_tasks
+                    on_press: root.manager.current="completed_screen"
+
+
+        # top panel
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1, 0.96
+            AnchorLayout:
+                anchor_y: 'top'
+                size_hint: 1, 0.13
+                GridLayout:
+                    size_hint: 1, 0.05
+                    cols: 4
+                    rows: 1
+                    Label:
+                        text: 'Lists'
+                        size_hint: 0.5, 0.05
+                        id: list_name
+#                    MDTextField:
+#                        id:search_task
+#                        halign: 'center'
+#                        valign: 'center'
+#                        hint_text: 'Search'
+#                        size_hint: 1, None
+#                        line_color_normal: 0.15,0.15,0.15
+#                        on_text_validate: root.search()
+
+#                    MDIconButton:
+#                        id: rename
+#                        icon: 'rename-box'
+#                        on_press: root.manager.current='1'
+#                        line_color: 1,1,1,1
+#                    MDIconButton:
+#                        icon: 'arrow-down'
+#                        line_color: 1,1,1,1
+#                        id: sort
+#                        on_press: root.search()
+
+
+            # Center
+
+#            BoxLayout:
+#                orientation: 'vertical'
+#                size_hint: 0.1, 0.1
+#                MDFloatingActionButton:
+#                    icon: "plus"
+#                    md_bg_color: 'black'
+#                    on_press: root.manager.current = 'adding_newTask_screen'
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: 1,1
+
+                BoxLayout:
+                    ScrollView:
+                        line_color_normal: 1,1,0,1
+                        id: listBox
+                        line_color: 1, 1, 1, 1
+
+<RenameTaskScreen@Screen>:
+    new_name:new_name
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 0.5, 0.25
+            MDTextField:
+                id:new_name
+                hint_text: 'type new list name'
+                color: 'white'
+                halign: 'center'
+                valign: 'center'
+                size_hint: 1, None
+                multiline: False
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'center'
+                GridLayout:
+                    cols: 1
+                    rows: 2
+                    MDRoundFlatButton:
+                        on_press: root.change_text()
+                        text: 'Rename'
+                        size_hint: 1, 0.5
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        line_color: 1, 1, 1, 1
+                    MDRoundFlatButton:
+                        text: 'Back'
+                        on_press: root.manager.current = 'main_menu_screen'
+                        size_hint: 1, 0.5
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        line_color: 1, 1, 1, 1
+
+<AddingNewListForAll@Screen>:
+    newLists:newLists
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 0.5, 0.25
+            MDTextField:
+                id: newLists
+                hint_text: 'Name of new list'
+                color: 'white'
+                halign: 'center'
+                valign: 'center'
+                size_hint: 1, None
+                multiline: False
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'center'
+                GridLayout:
+                    cols: 1
+                    rows: 2
+                    MDRoundFlatButton:
+                        text: 'Create new list'
+                        on_press: root.addlist()
+                        size_hint: 1, 0.5
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        line_color: 1, 1, 1, 1
+                    MDRoundFlatButton:
+                        text: 'Back'
+                        on_press: root.manager.current = 'adding_newTask_screen_for_all'
+                        size_hint: 1, 0.5
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        line_color: 1, 1, 1, 1
+
+<AddingNewTaskScreenForAll@Screen>:
+    taskToTxt:taskToTxt
+    listToTxt:listToTxt
+    check_the_terms_button:check_the_terms_button
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 0.5, 0.4
+            MDTextField:
+                id: taskToTxt
+                hint_text: 'Name of new task'
+                color: 'white'
+                halign: 'center'
+                valign: 'center'
+                size_hint: 1, None
+                multiline: False
+                on_text_validate: root.addTask()
+            MDDropDownItem:
+                size_hint: 0.3, 0.5
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                id: listToTxt
+                text: 'Chose list'
+                on_release: root.menu.open()
+            BoxLayout:
+                size_hint: 0, 0.3
+            GridLayout:
+                cols: 2
+                rows: 1
+                size_hint: 0.3, 0.25
+
+                MDCheckbox:
+                    id: check_the_terms_button
+                    text: 'Schedule deadlines'
+                    size_hint: 0.1, 0.25
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 1, 1
+                    line_color: 1, 1, 1, 1
+                    on_active: root.on_checkbox_active(*args)
+                Label:
+                    text: 'Schedule the deadlines'
+            BoxLayout:
+                size_hint: 0, 0.3
+
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'center'
+
+                GridLayout:
+                    cols: 1
+                    rows: 2
+                    MDRoundFlatButton:
+                        text: 'Add task'
+                        id: addTaskButton
+                        on_press: root.addTask()
+                        size_hint: 1, 0.5
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        line_color: 1, 1, 1, 1
+                    MDRoundFlatButton:
+                        text: 'Back'
+                        on_press: root.manager.current = 'main_menu_screen'
+                        size_hint: 1, 0.5
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        line_color: 1, 1, 1, 1
+
+<CompletedTaskScreen@Screen>:
+    listBox:listBox
+    #rename:rename
+    #search_task:search_task
+    #theme_changer:theme_changer
+    all_tasks:all_tasks
+    important_tasks:important_tasks
+    create_list:create_list
+    completed_tasks:completed_tasks
+    list_name:list_name
+    #sort:sort
+    all_lists:all_lists
+    #add_button:add_button
+    orientation: 'vertical'
+
+
+
+    # right lateral panel
+    BoxLayout:
+        BoxLayout:
+            size_hint: '0.05', '1.2'
+            pos_hint: {'y': 0.17}
+            orientation: 'vertical'
+
+            GridLayout:
+                cols: 1
+                rows: 12
+
+                BoxLayout:
+                    size_hint: 1, 0.5
+                MDIconButton:
+                    icon: 'home'
+                    line_color: 1,1,1,1
+                    id: all_tasks
+                    #on_press: root.main_tasks()
+                    on_press: root.manager.current='main_menu_screen'
+                BoxLayout:
+                    size_hint: 1, 0.08
+                MDIconButton:
+                    icon: 'star'
+                    line_color: 1,1,1,1
+                    id: important_tasks
+                    on_press: root.manager.current='important_tasks_screen'
+                BoxLayout:
+                    size_hint: 1, 0.08
+                MDIconButton:
+                    icon: 'pencil-plus'
+                    line_color: 1,1,1,1
+                    id: create_list
+                    on_press: root.manager.current = 'create_new_list_screen'
+                BoxLayout:
+                    size_hint: 1, 0.08
+                MDIconButton:
+                    icon: 'newspaper'
+                    line_color: 1,1,1,1
+                    id: all_lists
+                    on_press: root.manager.current = 'lists_of_lists_screen'
+                BoxLayout:
+                    size_hint: 1, 0.08
+                MDIconButton:
+                    icon: 'bank-check'
+                    line_color: 1,1,1,1
+                    id: completed_tasks
+                    on_press: root.manager.current="completed_screen"
+
+
+        # top panel
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1, 0.96
+            AnchorLayout:
+                anchor_y: 'top'
+                size_hint: 1, 0.01
+                GridLayout:
+                    size_hint: 1, 0.05
+                    cols: 4
+                    rows: 1
+                    Label:
+                        text: 'Completed'
+                        size_hint: 0.5, 0.05
+                        id: list_name
+#                    MDTextField:
+#                        id:search_task
+#                        halign: 'center'
+#                        valign: 'center'
+#                        hint_text: 'Search'
+#                        size_hint: 1, None
+#                        line_color_normal: 0.15,0.15,0.15
+#                        on_text_validate: root.search()
+#                    MDIconButton:
+#                        id: rename
+#                        icon: 'rename-box'
+#                        on_press: root.manager.current='1'
+#                        line_color: 1,1,1,1
+#                    MDIconButton:
+#                        icon: 'arrow-down'
+#                        line_color: 1,1,1,1
+#                        id: sort
+
+            # Center
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: 0.1, 0.1
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: 1,1
+
+                BoxLayout:
+                    ScrollView:
+                        line_color_normal: 1,1,0,1
+                        id: listBox
+                        line_color: 1, 1, 1, 1
+
+<Registration@Screen>:
+    login:login
+    pswrd:pswrd
+    warning:warning
+    orientation: 'vertical'
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        BoxLayout:
+            #pos_hint: {'x': 1}
+            orientation: 'vertical'
+            size_hint: 0.5, 0.25
+            MDTextField:
+                id: login
+                hint_text: "Enter your email"
+                color: 'white'
+                halign: 'center'
+                valign: 'center'
+                size_hint: 1, None
+                multiline: False
+                on_text_validate: root.sign_in()
+            MDTextField:
+                spacing: 1, 1
+                id: pswrd
+                hint_text: "Enter your password"
+                size_hint: 1, None
+                halign: 'center'
+                valign: 'center'
+                password: True
+                multiline: False
+                on_text_validate: root.sign_in()
+            BoxLayout:
+                size_hint: 1, 1.5
+            AnchorLayout:
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: 1, 4.5
+                    MDRoundFlatButton:
+                        size_hint: 1, 1
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        line_color: 1, 1, 1, 1
+                        text: 'Log in'
+                        on_press: root.sign_in()
+                    MDRoundFlatButton:
+                        size_hint: 1, 1
+                        halign: 'center'
+                        valign: 'center'
+                        text: 'Sign up'
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        line_color: 1, 1, 1, 1
+                        on_press: root.register()
+            BoxLayout:
+                size_hint: 3, 3.5
+            AnchorLayout:
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: 1, 1
+                    Label:
+                        id: warning
+                        size_hint: 1, 1
+                        text: ''
